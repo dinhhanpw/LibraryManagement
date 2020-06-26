@@ -4,9 +4,33 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibraryManagement"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        xmlns:viewModel="clr-namespace:LibraryManagement.ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Quản Lý Thư Viện"
+        Icon="Icons/books.png" RenderOptions.BitmapScalingMode="HighQuality"
+        Height="450" Width="800">
+    <Window.Resources>
+        <telerik:StringToGlyphConverter x:Key="StringToGlyphConverter" />
+
+        <Style TargetType="telerik:RadNavigationViewItem" BasedOn="{StaticResource RadNavigationViewItemStyle}" >
+            <Setter Property="Content" Value="{Binding Title}" />
+            <Setter Property="Icon" Value="{Binding IconGlyph}" />
+            <Setter Property="IconTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <telerik:RadGlyph Glyph="{Binding Converter={StaticResource StringToGlyphConverter}}" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Window.DataContext>
+        <viewModel:MainViewModel/>
+    </Window.DataContext>
     <Grid>
-        
+        <telerik:RadNavigationView ItemsSource="{Binding Items}" SelectedIndex="0">
+            
+        </telerik:RadNavigationView>
     </Grid>
 </Window>

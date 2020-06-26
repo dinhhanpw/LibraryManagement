@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryManagement.ViewModel
 {
-    class BaseViewModel
+    class BaseViewModel : BindableBase
     {
     }
 }
