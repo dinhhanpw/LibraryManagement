@@ -35,3 +35,5 @@ D:\document_file\GIT\LibraryManagement\LibraryManagement\LibraryManagement\obj\D
 D:\document_file\GIT\LibraryManagement\LibraryManagement\LibraryManagement\obj\Debug\LibraryManagement.csproj.CopyComplete
 D:\document_file\GIT\LibraryManagement\LibraryManagement\LibraryManagement\obj\Debug\LibraryManagement.exe
 D:\document_file\GIT\LibraryManagement\LibraryManagement\LibraryManagement\obj\Debug\LibraryManagement.pdb
+D:\document_file\GIT\LibraryManagement\LibraryManagement\LibraryManagement\obj\Debug\View\ReaderManagementView.g.cs
+D:\document_file\GIT\LibraryManagement\LibraryManagement\LibraryManagement\obj\Debug\View\ReaderManagementView.baml

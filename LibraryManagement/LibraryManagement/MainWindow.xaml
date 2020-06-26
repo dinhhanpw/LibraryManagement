@@ -6,10 +6,11 @@
         xmlns:local="clr-namespace:LibraryManagement"
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
         xmlns:viewModel="clr-namespace:LibraryManagement.ViewModel"
+        xmlns:view="clr-namespace:LibraryManagement.View"
         mc:Ignorable="d"
         Title="Quản Lý Thư Viện"
-        Icon="Icons/books.png" RenderOptions.BitmapScalingMode="HighQuality"
-        Height="450" Width="800">
+        Icon="Icons/books.png"
+        Height="600" Width="800">
     <Window.Resources>
         <telerik:StringToGlyphConverter x:Key="StringToGlyphConverter" />
 
@@ -30,7 +31,7 @@
     </Window.DataContext>
     <Grid>
         <telerik:RadNavigationView ItemsSource="{Binding Items}" SelectedIndex="0">
-            
+            <view:ReaderManagementView/>
         </telerik:RadNavigationView>
     </Grid>
 </Window>
