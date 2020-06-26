@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace LibraryManagement.ViewModel
 {
-    class BindableBase : INotifyPropertyChanged
+    public class BindableBase : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 

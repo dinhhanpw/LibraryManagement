@@ -37,3 +37,12 @@ D:\document_file\GIT\LibraryManagement\LibraryManagement\LibraryManagement\obj\D
 D:\document_file\GIT\LibraryManagement\LibraryManagement\LibraryManagement\obj\Debug\LibraryManagement.pdb
 D:\document_file\GIT\LibraryManagement\LibraryManagement\LibraryManagement\obj\Debug\View\ReaderManagementView.g.cs
 D:\document_file\GIT\LibraryManagement\LibraryManagement\LibraryManagement\obj\Debug\View\ReaderManagementView.baml
+D:\document_file\GIT\LibraryManagement\LibraryManagement\LibraryManagement\bin\Debug\EntityFramework.dll
+D:\document_file\GIT\LibraryManagement\LibraryManagement\LibraryManagement\bin\Debug\EntityFramework.SqlServer.dll
+D:\document_file\GIT\LibraryManagement\LibraryManagement\LibraryManagement\bin\Debug\FluentValidation.dll
+D:\document_file\GIT\LibraryManagement\LibraryManagement\LibraryManagement\bin\Debug\System.ComponentModel.Annotations.dll
+D:\document_file\GIT\LibraryManagement\LibraryManagement\LibraryManagement\bin\Debug\EntityFramework.xml
+D:\document_file\GIT\LibraryManagement\LibraryManagement\LibraryManagement\bin\Debug\EntityFramework.SqlServer.xml
+D:\document_file\GIT\LibraryManagement\LibraryManagement\LibraryManagement\bin\Debug\FluentValidation.xml
+D:\document_file\GIT\LibraryManagement\LibraryManagement\LibraryManagement\obj\Debug\LibraryManagement_Content.g.cs
+D:\document_file\GIT\LibraryManagement\LibraryManagement\LibraryManagement\obj\Debug\MainResource.baml

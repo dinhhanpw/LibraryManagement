@@ -35,9 +35,24 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.8.6.2\lib\net45\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.4.1\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -66,13 +81,57 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\CTPhieuMuon.cs">
+      <DependentUpon>QLThuVien.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DocGia.cs">
+      <DependentUpon>QLThuVien.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LoaiDocGia.cs">
+      <DependentUpon>QLThuVien.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LoaiSach.cs">
+      <DependentUpon>QLThuVien.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PhieuMuon.cs">
+      <DependentUpon>QLThuVien.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\QLThuVien.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLThuVien.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\QLThuVien.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLThuVien.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\QLThuVien.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QLThuVien.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\QuyDinh.cs">
+      <DependentUpon>QLThuVien.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Sach.cs">
+      <DependentUpon>QLThuVien.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\BindableBase.cs" />
+    <Compile Include="ViewModel\DataProvider.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NavigationItem.cs" />
+    <Compile Include="ViewModel\ReaderViewModel.cs" />
+    <Compile Include="ViewModel\ValidatableBindableBase.cs" />
+    <Compile Include="ViewModel\Validator\ReaderValidator.cs" />
     <Compile Include="View\ReaderManagementView.xaml.cs">
       <DependentUpon>ReaderManagementView.xaml</DependentUpon>
     </Compile>
+    <Page Include="MainResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -108,6 +167,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Model\QLThuVien.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QLThuVien.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\QLThuVien.edmx.diagram">
+      <DependentUpon>QLThuVien.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -116,14 +183,27 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Model\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Icons\library.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\books.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\QLThuVien.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QLThuVien.edmx</DependentUpon>
+      <LastGenOutput>QLThuVien.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model\QLThuVien.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>QLThuVien.edmx</DependentUpon>
+      <LastGenOutput>QLThuVien.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

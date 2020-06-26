@@ -10,6 +10,6 @@ namespace LibraryManagement.ViewModel
     {
         public string Title { get; set; }
         public string IconGlyph { get; set; }
-        public BaseViewModel Content { get; set; }
+        public BaseViewModel ViewContent { get; set; }
     }
 }

@@ -8,10 +8,10 @@ namespace LibraryManagement.ViewModel
 
         public MainViewModel()
         {
-            Items.Add(new NavigationItem() { Title = "Quản Lý Đọc Giả", IconGlyph = "&#xe801", Content = null });
-            Items.Add(new NavigationItem() { Title = "Quản Lý Sách", IconGlyph = "&#xe651", Content = null });
-            Items.Add(new NavigationItem() { Title = "Quản Lý Mượn Trả Sách", IconGlyph = "&#xe649", Content = null });
-            Items.Add(new NavigationItem() { Title = "Quy Định", IconGlyph = "&#xe401", Content = null });
+            Items.Add(new NavigationItem() { Title = "Quản Lý Đọc Giả", IconGlyph = "&#xe801", ViewContent = new ReaderViewModel() });
+            Items.Add(new NavigationItem() { Title = "Quản Lý Sách", IconGlyph = "&#xe651", ViewContent = null });
+            Items.Add(new NavigationItem() { Title = "Quản Lý Mượn Trả Sách", IconGlyph = "&#xe649", ViewContent = null });
+            Items.Add(new NavigationItem() { Title = "Quy Định", IconGlyph = "&#xe401", ViewContent = null });
         }
     }
 }
