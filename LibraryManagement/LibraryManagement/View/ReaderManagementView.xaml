@@ -163,6 +163,7 @@
         </GroupBox>
         <telerik:RadGridView Margin="5" Grid.Row="1" Grid.ColumnSpan="2"
                              x:Name="radGridView" ItemsSource="{Binding Readers}"
+                             SelectedItem="{Binding Holder,Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                              AutoGenerateColumns="False" GroupRenderMode="Flat" CanUserFreezeColumns="False"
                              CanUserSortColumns="True">
             <telerik:RadGridView.Columns>
