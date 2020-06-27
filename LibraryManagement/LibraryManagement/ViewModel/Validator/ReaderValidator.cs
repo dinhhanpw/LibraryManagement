@@ -6,22 +6,69 @@ namespace LibraryManagement.ViewModel.Validator
 {
     public class ReaderValidator : AbstractValidator<DocGia>
     {
-        private static string notEmpty_ErrMessage = "không được để trống";
-        private static string mustGreater_ErrMessage = "phải lớn hơn";
-        private static string mustLess_ErrMessage = "phải nhỏ hơn";
-        private static DateTime currentDate = DateTime.Now;
 
-        public int MinLength { get; set; } = 5;
+        private int MinLength { get; set; } = 5;
+
         public ReaderValidator()
         {
 
-            RuleFor(reader => reader.Ten).NotNull().WithMessage($"Tên {notEmpty_ErrMessage}")
-                .NotEmpty().WithMessage($"Tên {notEmpty_ErrMessage}")
-                .MinimumLength(MinLength).WithMessage($"Độ dài của chuỗi {mustGreater_ErrMessage} {MinLength}");
+            CascadeMode = CascadeMode.StopOnFirstFailure;
 
-            RuleFor(reader => reader.NgaySinh)
-                .LessThan(currentDate.AddYears(-18)).WithMessage($"Đọc giả {mustGreater_ErrMessage} 18 tuổi")
-                .GreaterThan(currentDate.AddYears(-35)).WithMessage($"Đọc giả {mustLess_ErrMessage} 35 tuổi");
+            RuleSet("Ten", () =>
+            {
+                RuleFor(reader => reader.Ten)
+                .NotNull().WithMessage($"Tên {ValidationHelper.notEmpty_ErrMessage}")
+                .NotEmpty().WithMessage($"Tên {ValidationHelper.notEmpty_ErrMessage}")
+                .MinimumLength(MinLength).WithMessage($"Tên {ValidationHelper.mustLeast_ErrMessage} {MinLength} kí tự");
+            });
+
+            RuleSet("NgaySinh", () =>
+            {
+                RuleFor(reader => reader.NgaySinh)
+                .Must((reader, val) =>
+                {
+                    if (val <= reader.NgayLap.AddYears(-18) && val > reader.NgayLap.AddYears(-36)) return true;
+
+                    return false;
+
+                }).WithMessage($"Đọc giả phải {ValidationHelper.MustRange_ErrMessage(18, 35)} tuổi");
+            });
+
+            RuleSet("DiaChi", () =>
+            {
+                RuleFor(reader => reader.DiaChi)
+                .NotNull().WithMessage($"Tên {ValidationHelper.notEmpty_ErrMessage}")
+                .NotEmpty().WithMessage($"Tên {ValidationHelper.notEmpty_ErrMessage}")
+                .MinimumLength(MinLength).WithMessage($"Địa chỉ {ValidationHelper.mustLeast_ErrMessage} {MinLength} kí tự");
+            });
+
+            RuleSet("Email", () =>
+            {
+                RuleFor(reader => reader.Email)
+                .EmailAddress().WithMessage("Email không hợp lệ");
+            });
+
+            RuleSet("NgayLap", () =>
+            {
+                RuleFor(reader => reader.NgayLap)
+                .Must((reader, val) =>
+                {
+                    if (val >= reader.NgaySinh.AddYears(18) && val < reader.NgaySinh.AddYears(36)) return true;
+                    return false;
+
+                }).WithMessage($"Đọc giả phải {ValidationHelper.MustRange_ErrMessage(18, 35)} tuổi");
+            });
+
+
+
+
+
+
+
+
+
+
+
 
         }
     }

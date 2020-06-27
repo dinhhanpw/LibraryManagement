@@ -7,7 +7,7 @@ namespace LibraryManagement.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        protected virtual void SetProperty<T>(ref T property, T value, [CallerMemberName] string propertyName = null)
+        protected virtual void SetBindableProperty<T>(ref T property, T value, [CallerMemberName] string propertyName = null)
         {
             if (object.Equals(property, value)) return;
 
