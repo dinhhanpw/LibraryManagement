@@ -60,16 +60,6 @@ namespace LibraryManagement.ViewModel.Validator
             });
 
 
-
-
-
-
-
-
-
-
-
-
         }
     }
 

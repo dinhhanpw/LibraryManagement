@@ -93,9 +93,9 @@
                     RelativeSource={RelativeSource FindAncestor,
                     AncestorType={x:Type UserControl}},
                     Path=DataContext.ReaderTypes}"
-                                     SelectedItem="{Binding LoaiDocGia}"
+                                     SelectedItem="{Binding LoaiDocGia, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                      SelectedIndex="0"
-                                     DisplayMemberPath="Ten"/>
+                                     DisplayMemberPath="Ten" />
 
                 <TextBlock Grid.Row="2" Text="Ngày sinh"/>
                 <telerik:RadDatePicker Grid.Column="1" Grid.Row="2"
@@ -145,7 +145,8 @@
 
                     </StackPanel>
                 </telerik:RadButton>
-                <telerik:RadButton  >
+                <telerik:RadButton  Command="{Binding EditCommand}"
+                                    CommandParameter="{Binding ElementName=radGridView, Path=SelectedItem}">
                     <StackPanel Orientation="Horizontal" Width="90" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <telerik:RadGlyph Glyph="&#xe64a;" FontSize="25" />
                         <TextBlock Text="Sửa" Margin="10 0 0 0" VerticalAlignment="Center"/>
@@ -165,13 +166,14 @@
                              x:Name="radGridView" ItemsSource="{Binding Readers}"
                              SelectedItem="{Binding Holder,Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                              AutoGenerateColumns="False" GroupRenderMode="Flat" CanUserFreezeColumns="False"
-                             CanUserSortColumns="True">
+                             CanUserSortColumns="True" >
             <telerik:RadGridView.Columns>
 
                 <telerik:GridViewDataColumn Header="Họ Tên" Width="*"
                                             DataMemberBinding="{Binding Ten, UpdateSourceTrigger=PropertyChanged}"/>
-                <telerik:GridViewDataColumn Header="Loại" 
-                                            DataMemberBinding="{Binding LoaiDocGia.Ten, UpdateSourceTrigger=PropertyChanged}"/>
+                <telerik:GridViewComboBoxColumn Header="Loại" ItemsSource="{Binding ReaderTypes}"
+                                                DisplayMemberPath="Ten"
+                                            DataMemberBinding="{Binding LoaiDocGia, UpdateSourceTrigger=PropertyChanged}"/>
                 <telerik:GridViewDataColumn Header="Ngày Sinh" 
                                             DataMemberBinding="{Binding NgaySinh , UpdateSourceTrigger=PropertyChanged}"/>
                 <telerik:GridViewDataColumn Header="Địa Chỉ" Width="*"

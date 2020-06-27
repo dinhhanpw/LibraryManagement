@@ -76,14 +76,10 @@ namespace LibraryManagement.Model
             }
         }
 
-
-
-        public virtual LoaiDocGia LoaiDocGia {
+        public virtual LoaiDocGia LoaiDocGia
+        {
             get { return _loaiDocGia; }
-            set
-            {
-                SetBindableProperty(ref _loaiDocGia, value);
-            }
+            set { SetBindableProperty(ref _loaiDocGia, value); }
         }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuMuon> PhieuMuons { get; set; }

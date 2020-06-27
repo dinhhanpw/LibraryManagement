@@ -29,5 +29,10 @@ namespace LibraryManagement.View
         {
 
         }
+
+        private void radGridView_SelectionChanged(object sender, Telerik.Windows.Controls.SelectionChangeEventArgs e)
+        {
+
+        }
     }
 }
