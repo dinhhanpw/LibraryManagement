@@ -123,8 +123,10 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NavigationItem.cs" />
     <Compile Include="ViewModel\ReaderViewModel.cs" />
+    <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\ValidatableBindableBase.cs" />
     <Compile Include="ViewModel\Validator\ReaderValidator.cs" />
+    <Compile Include="ViewModel\Validator\ValidationHelper.cs" />
     <Compile Include="View\ReaderManagementView.xaml.cs">
       <DependentUpon>ReaderManagementView.xaml</DependentUpon>
     </Compile>

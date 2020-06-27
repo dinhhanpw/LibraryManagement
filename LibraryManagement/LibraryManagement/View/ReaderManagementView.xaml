@@ -8,7 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        
+
         <Grid.Resources>
             <Style TargetType="GroupBox" >
                 <Setter Property="Margin" Value="10"/>
@@ -88,20 +88,38 @@
                          />
 
                 <TextBlock Grid.Row="1" Text="Loại đọc giả"/>
-                <telerik:RadComboBox Grid.Column="1" Grid.Row="1" DisplayMemberPath="Ten"/>
+                <telerik:RadComboBox Grid.Column="1" Grid.Row="1" 
+                                     ItemsSource="{Binding 
+                    RelativeSource={RelativeSource FindAncestor,
+                    AncestorType={x:Type UserControl}},
+                    Path=DataContext.ReaderTypes}"
+                                     SelectedItem="{Binding LoaiDocGia}"
+                                     SelectedIndex="0"
+                                     DisplayMemberPath="Ten"/>
 
                 <TextBlock Grid.Row="2" Text="Ngày sinh"/>
-                <telerik:RadDatePicker Grid.Column="1" Grid.Row="2" DateTimeWatermarkContent="Ngày sinh..." />
+                <telerik:RadDatePicker Grid.Column="1" Grid.Row="2"
+                                       Validation.ErrorTemplate="{StaticResource ErrorInfoTemplate}"
+                                       SelectedValue="{Binding NgaySinh}"
+                                       DateTimeWatermarkContent="Ngày sinh..." />
 
                 <TextBlock Grid.Row="3" Text="Địa chỉ"/>
-                <telerik:RadWatermarkTextBox Grid.Column="1" Grid.Row="3" 
+                <telerik:RadWatermarkTextBox Grid.Column="1" Grid.Row="3"
+                                             Validation.ErrorTemplate="{StaticResource ErrorInfoTemplate}"
+                                             Text="{Binding DiaChi}"
                                              WatermarkContent="Địa chỉ..."/>
 
                 <TextBlock Grid.Row="4" Text="Email"/>
-                <telerik:RadWatermarkTextBox Grid.Column="1" Grid.Row="4" WatermarkContent="Email..."/>
+                <telerik:RadWatermarkTextBox Grid.Column="1" Grid.Row="4"
+                                             Validation.ErrorTemplate="{StaticResource ErrorInfoTemplate}"
+                                             Text="{Binding Email}"
+                                             WatermarkContent="Email..."/>
 
                 <TextBlock Grid.Row="5" Text="Ngày lập thẻ"/>
-                <telerik:RadDatePicker Grid.Column="1" Grid.Row="5" DateTimeWatermarkContent="Ngày lập thẻ..."/>
+                <telerik:RadDatePicker Grid.Column="1" Grid.Row="5" 
+                                        Validation.ErrorTemplate="{StaticResource ErrorInfoTemplate}"
+                                        SelectedValue="{Binding NgayLap}"
+                                        DateTimeWatermarkContent="Ngày lập thẻ..."/>
 
             </Grid>
         </GroupBox>
@@ -119,7 +137,8 @@
                     </Style>
                 </StackPanel.Resources>
                 <telerik:RadButton  Command="{Binding AddCommand}"
-                                    CommandParameter="{Binding ElementName=displayNameTextBox, Path=DataContext}">
+                                    CommandParameter="{Binding Holder}"
+                                    >
                     <StackPanel Orientation="Horizontal" Width="90" VerticalAlignment="Center" HorizontalAlignment="Center">
                         <telerik:RadGlyph Glyph="&#xe12e;" FontSize="25" />
                         <TextBlock Text="Thêm" Margin="10 0 0 0" VerticalAlignment="Center"/>
@@ -138,12 +157,13 @@
                         <telerik:RadGlyph Glyph="&#xe10c;" FontSize="25" />
                         <TextBlock Text="Xóa" Margin="10 0 0 0" VerticalAlignment="Center"/>
 
-                        </StackPanel>
+                    </StackPanel>
                 </telerik:RadButton>
             </StackPanel>
         </GroupBox>
         <telerik:RadGridView Margin="5" Grid.Row="1" Grid.ColumnSpan="2"
                              x:Name="radGridView" ItemsSource="{Binding Readers}"
+                             SelectedItem="{Binding Holder,Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                              AutoGenerateColumns="False" GroupRenderMode="Flat" CanUserFreezeColumns="False"
                              CanUserSortColumns="True">
             <telerik:RadGridView.Columns>
@@ -159,7 +179,7 @@
                 <telerik:GridViewDataColumn Header="Email" 
                                             DataMemberBinding="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
                 <telerik:GridViewDataColumn Header="Ngày Lập Thẻ" 
-                                            DataMemberBinding="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
+                                            DataMemberBinding="{Binding NgayLap, UpdateSourceTrigger=PropertyChanged}"/>
             </telerik:RadGridView.Columns>
         </telerik:RadGridView>
     </Grid>

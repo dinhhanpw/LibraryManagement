@@ -28,23 +28,30 @@ namespace LibraryManagement.ViewModel
             return _errors[propertyName];
         }
 
-        protected virtual void OnErrorChanged(string protertyName)
+        protected virtual void OnErrorChanged(string propertyName)
         {
-            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(protertyName));
+            ErrorsChanged?.Invoke(this, new DataErrorsChangedEventArgs(propertyName));
         }
 
-        protected void ValidateProperty(String propertyName, T obj)
+        public void RaiseErrorChangedOnProperty(string propertyName, T obj)
         {
-            ValidationResult result = validator.Validate(obj);
+            ValidateProperty(propertyName, obj);
+            OnErrorChanged(propertyName);
+        }
+
+        public void ValidateProperty(String propertyName, T obj)
+        {
+            ValidationResult result = validator.Validate(obj, ruleSet: propertyName);
             if (!result.IsValid)
             {
-                _errors[propertyName] = result.Errors.Select(e => e.ErrorMessage).ToList();
+                _errors[propertyName]
+                    = result.Errors
+                    .Select(e => e.ErrorMessage).ToList();
             }
             else
             {
                 _errors.Remove(propertyName);
             }
-
         }
 
 
@@ -52,7 +59,7 @@ namespace LibraryManagement.ViewModel
         {
             if (object.Equals(property, value)) return;
 
-            base.SetProperty(ref property, value, propertyName);
+            SetBindableProperty(ref property, value, propertyName);
             ValidateProperty(propertyName, obj);
             OnErrorChanged(propertyName);
         }

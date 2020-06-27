@@ -24,5 +24,10 @@ namespace LibraryManagement.View
         {
             InitializeComponent();
         }
+
+        private void RadComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

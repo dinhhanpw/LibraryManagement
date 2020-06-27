@@ -20,6 +20,11 @@ namespace LibraryManagement.Model
         public DocGia()
         {
             this.PhieuMuons = new HashSet<PhieuMuon>();
+
+            List<string> emptyList = new List<string>();
+            _errors[nameof(Ten)] = emptyList;
+            _errors[nameof(DiaChi)] = emptyList;
+            _errors[nameof(Email)] = emptyList;
         }
 
         static DocGia()
@@ -28,6 +33,11 @@ namespace LibraryManagement.Model
         }
 
         private string _ten;
+        private LoaiDocGia _loaiDocGia;
+        private DateTime _ngaySinh = DateTime.Now.AddYears(-18);
+        private string _diachi;
+        private string _email;
+        private DateTime _ngayLap = DateTime.Now;
 
         public int Id { get; set; }
 
@@ -36,13 +46,45 @@ namespace LibraryManagement.Model
             get { return _ten; }
             set { SetValidatableProperty(ref _ten, value, this); }
         }
-        public Nullable<int> IdLoai { get; set; }
-        public Nullable<System.DateTime> NgaySinh { get; set; }
-        public string DiaChi { get; set; }
-        public string Email { get; set; }
-        public Nullable<System.DateTime> NgayLap { get; set; }
+        public int IdLoai { get; set; }
+        public DateTime NgaySinh
+        {
+            get { return _ngaySinh; }
+            set
+            {
+                SetValidatableProperty(ref _ngaySinh, value, this);
+                RaiseErrorChangedOnProperty("NgayLap", this);
+            }
+        }
+        public string DiaChi
+        {
+            get { return _diachi; }
+            set { SetValidatableProperty(ref _diachi, value, this); }
+        }
+        public string Email
+        {
+            get { return _email; }
+            set { SetValidatableProperty(ref _email, value, this); }
+        }
+        public DateTime NgayLap
+        {
+            get { return _ngayLap; }
+            set
+            {
+                SetValidatableProperty(ref _ngayLap, value, this);
+                RaiseErrorChangedOnProperty("NgaySinh", this);
+            }
+        }
 
-        public virtual LoaiDocGia LoaiDocGia { get; set; }
+
+
+        public virtual LoaiDocGia LoaiDocGia {
+            get { return _loaiDocGia; }
+            set
+            {
+                SetBindableProperty(ref _loaiDocGia, value);
+            }
+        }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuMuon> PhieuMuons { get; set; }
     }
