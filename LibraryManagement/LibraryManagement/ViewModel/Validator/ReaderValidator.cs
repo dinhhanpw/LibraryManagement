@@ -45,6 +45,7 @@ namespace LibraryManagement.ViewModel.Validator
             RuleSet("Email", () =>
             {
                 RuleFor(reader => reader.Email)
+                .NotEmpty().WithMessage($"Email {ValidationHelper.notEmpty_ErrMessage}")
                 .EmailAddress().WithMessage("Email không hợp lệ");
             });
 

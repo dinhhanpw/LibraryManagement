@@ -57,7 +57,7 @@ namespace LibraryManagement.ViewModel
 
         public void SetValidatableProperty<E>(ref E property, E value, T obj, [CallerMemberName] string propertyName = null)
         {
-            if (object.Equals(property, value)) return;
+            //if (object.Equals(property, value)) return;
 
             SetBindableProperty(ref property, value, propertyName);
             ValidateProperty(propertyName, obj);

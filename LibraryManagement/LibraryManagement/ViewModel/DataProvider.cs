@@ -9,13 +9,17 @@ namespace LibraryManagement.ViewModel
 {
     class DataProvider
     {
-        private static QLThuVienEntities _instance;
-        public static QLThuVienEntities Instance
+        private static DataProvider _instance;
+
+
+        public QLThuVienEntities DataBase { get; set; }
+
+        public static DataProvider Instance
         {
             get
             {
                 if (_instance == null)
-                    _instance = new QLThuVienEntities();
+                    _instance = new DataProvider();
 
                 return _instance;
             }
@@ -23,7 +27,7 @@ namespace LibraryManagement.ViewModel
 
         private DataProvider()
         {
-            _instance = new QLThuVienEntities();
+            DataBase = new QLThuVienEntities();
         }
     }
 }

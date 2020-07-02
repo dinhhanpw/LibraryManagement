@@ -1,31 +1,42 @@
 ﻿using LibraryManagement.Model;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Data.Entity;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
+using Telerik.Windows.Controls;
+using Telerik.Windows.Controls.GridView;
 
 namespace LibraryManagement.ViewModel
 {
     public class ReaderViewModel : BaseViewModel
     {
         private DocGia _holder;
+        private DocGia _selectedReader;
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand EditOnTableDataCommand { get; set; }
         public ObservableCollection<DocGia> Readers { get; set; }
+        public DocGia SelectedReader { get { return _selectedReader; }
+            set
+            {
+                if (value == null) return;
+                _selectedReader = value;
+
+                Holder.Ten = SelectedReader.Ten;
+                Holder.NgaySinh = SelectedReader.NgaySinh;
+                Holder.IdLoai = SelectedReader.IdLoai;
+                Holder.NgayLap = SelectedReader.NgayLap;
+                Holder.Email = SelectedReader.Email;
+                Holder.DiaChi = SelectedReader.DiaChi;
+
+            }
+        }
         public DocGia Holder
         {
             get { return _holder; }
             set
             {
-                if (value != null)
                     SetBindableProperty(ref _holder, value);
             }
         }
-
 
         public ObservableCollection<LoaiDocGia> ReaderTypes { get; set; }
 
@@ -33,8 +44,9 @@ namespace LibraryManagement.ViewModel
         {
             AddCommand = new RelayCommand<DocGia>(CanAdd, OnAdd);
             EditCommand = new RelayCommand<DocGia>(CanEdit, OnEdit);
-            Readers = new ObservableCollection<DocGia>(DataProvider.Instance.DocGias);
-            ReaderTypes = new ObservableCollection<LoaiDocGia>(DataProvider.Instance.LoaiDocGias);
+            EditOnTableDataCommand = new RelayCommand<GridViewRowEditEndedEventArgs>(argument => argument != null, OnEdit);
+            Readers = new ObservableCollection<DocGia>(DataProvider.Instance.DataBase.DocGias);
+            ReaderTypes = new ObservableCollection<LoaiDocGia>(DataProvider.Instance.DataBase.LoaiDocGias);
             Holder = new DocGia();
             Holder.LoaiDocGia = new LoaiDocGia();
         }
@@ -63,17 +75,36 @@ namespace LibraryManagement.ViewModel
                 NgayLap = Holder.NgayLap,
             };
 
-            DataProvider.Instance.DocGias.Add(docGia);
-            DataProvider.Instance.SaveChanges();
+            DataProvider.Instance.DataBase.DocGias.Add(docGia);
+            DataProvider.Instance.DataBase.SaveChanges();
 
             Readers.Add(docGia);
         }
 
         void OnEdit(DocGia reader)
         {
-            DocGia selectedReader = DataProvider.Instance.DocGias.First(p => p.Id == Holder.Id);
 
-            DataProvider.Instance.SaveChanges();
+            //DocGia selectedReader = DataProvider.Instance.DataBase.DocGias.First(p => p.Id == Holder.Id);
+
+            SelectedReader.Ten = Holder.Ten;
+            SelectedReader.NgaySinh = Holder.NgaySinh;
+            SelectedReader.IdLoai = Holder.IdLoai;
+            SelectedReader.NgayLap = Holder.NgayLap;
+            SelectedReader.Email = Holder.Email;
+            SelectedReader.DiaChi = Holder.DiaChi;
+
+            DataProvider.Instance.DataBase.SaveChanges();
         }
+
+       void OnEdit(GridViewRowEditEndedEventArgs args)
+        {
+            if (args.EditAction == GridViewEditAction.Cancel) return;
+
+            if(args.EditOperationType == GridViewEditOperationType.Edit)
+            {
+                DataProvider.Instance.DataBase.SaveChanges();
+            }
+        }
+
     }
 }

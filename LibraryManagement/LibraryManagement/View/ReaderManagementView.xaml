@@ -124,8 +124,7 @@
             </Grid>
         </GroupBox>
 
-        <GroupBox Grid.Column="1" Header="Thao Tác">
-            <StackPanel  >
+            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0 0 15 0" >
                 <StackPanel.Resources>
                     <Style TargetType="telerik:RadButton" BasedOn="{StaticResource RadButtonStyle}">
                         <Setter Property="Margin" Value="0 5 0 0"/>
@@ -161,12 +160,24 @@
                     </StackPanel>
                 </telerik:RadButton>
             </StackPanel>
-        </GroupBox>
+
         <telerik:RadGridView Margin="5" Grid.Row="1" Grid.ColumnSpan="2"
+                             ShowSearchPanel="True"
+                             NewRowPosition="Bottom"
+                             CanUserDeleteRows="True"
+                             CanUserSearch="True"
                              x:Name="radGridView" ItemsSource="{Binding Readers}"
-                             SelectedItem="{Binding Holder,Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                             SelectedItem="{Binding SelectedReader,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              AutoGenerateColumns="False" GroupRenderMode="Flat" CanUserFreezeColumns="False"
-                             CanUserSortColumns="True" >
+                             CanUserSortColumns="True">
+
+
+            <telerik:EventToCommandBehavior.EventBindings>
+                <telerik:EventBinding EventName="RowEditEnded" 
+                                      PassEventArgsToCommand="True"
+                                      Command="{Binding EditOnTableDataCommand}"/>
+            </telerik:EventToCommandBehavior.EventBindings>
+            
             <telerik:RadGridView.Columns>
 
                 <telerik:GridViewDataColumn Header="Họ Tên" Width="*"
@@ -175,7 +186,7 @@
                                                 DisplayMemberPath="Ten"
                                             DataMemberBinding="{Binding LoaiDocGia, UpdateSourceTrigger=PropertyChanged}"/>
                 <telerik:GridViewDataColumn Header="Ngày Sinh" 
-                                            DataMemberBinding="{Binding NgaySinh , UpdateSourceTrigger=PropertyChanged}"/>
+                                            DataMemberBinding="{Binding NgaySinh , UpdateSourceTrigger=PropertyChanged}" DataFormatString="M-d-yyyy"/>
                 <telerik:GridViewDataColumn Header="Địa Chỉ" Width="*"
                                             DataMemberBinding="{Binding DiaChi, UpdateSourceTrigger=PropertyChanged}"/>
                 <telerik:GridViewDataColumn Header="Email" 
