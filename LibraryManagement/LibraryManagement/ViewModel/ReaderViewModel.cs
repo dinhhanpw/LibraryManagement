@@ -14,7 +14,9 @@ namespace LibraryManagement.ViewModel
         public ICommand EditCommand { get; set; }
         public ICommand EditOnTableDataCommand { get; set; }
         public ObservableCollection<DocGia> Readers { get; set; }
-        public DocGia SelectedReader { get { return _selectedReader; }
+        public DocGia SelectedReader
+        {
+            get { return _selectedReader; }
             set
             {
                 if (value == null) return;
@@ -34,7 +36,7 @@ namespace LibraryManagement.ViewModel
             get { return _holder; }
             set
             {
-                    SetBindableProperty(ref _holder, value);
+                SetBindableProperty(ref _holder, value);
             }
         }
 
@@ -67,12 +69,12 @@ namespace LibraryManagement.ViewModel
         {
             DocGia docGia = new DocGia()
             {
-                Ten = Holder.Ten,
-                IdLoai = Holder.LoaiDocGia.Id,
-                NgaySinh = Holder.NgaySinh,
-                DiaChi = Holder.DiaChi,
-                Email = Holder.Email,
-                NgayLap = Holder.NgayLap,
+                Ten = reader.Ten,
+                IdLoai = reader.Id,
+                NgaySinh = reader.NgaySinh,
+                DiaChi = reader.DiaChi,
+                Email = reader.Email,
+                NgayLap = reader.NgayLap,
             };
 
             DataProvider.Instance.DataBase.DocGias.Add(docGia);
@@ -96,11 +98,16 @@ namespace LibraryManagement.ViewModel
             DataProvider.Instance.DataBase.SaveChanges();
         }
 
-       void OnEdit(GridViewRowEditEndedEventArgs args)
+        void OnEdit(GridViewRowEditEndedEventArgs args)
         {
             if (args.EditAction == GridViewEditAction.Cancel) return;
 
-            if(args.EditOperationType == GridViewEditOperationType.Edit)
+            if (args.EditOperationType == GridViewEditOperationType.Insert)
+            {
+                DataProvider.Instance.DataBase.DocGias.Add(args.NewData as DocGia);
+                DataProvider.Instance.DataBase.SaveChanges();
+            }
+            else if (args.EditOperationType == GridViewEditOperationType.Edit)
             {
                 DataProvider.Instance.DataBase.SaveChanges();
             }

@@ -13,6 +13,7 @@ namespace LibraryManagement.Model
     using LibraryManagement.ViewModel.Validator;
     using System;
     using System.Collections.Generic;
+    using System.Linq;
 
     public partial class DocGia : ValidatableBindableBase<DocGia>
     {
@@ -31,7 +32,7 @@ namespace LibraryManagement.Model
         {
             validator = new ReaderValidator();
         }
-
+        private static int firstId = DataProvider.Instance.DataBase.LoaiDocGias.First().Id;
         private string _ten;
         private LoaiDocGia _loaiDocGia;
         private DateTime _ngaySinh = DateTime.Now.AddYears(-18);
@@ -39,7 +40,7 @@ namespace LibraryManagement.Model
         private string _email;
         private DateTime _ngayLap = DateTime.Now;
 
-        public int Id { get; set; }
+        public int Id { get; set; } = firstId;
 
         public string Ten
         {
