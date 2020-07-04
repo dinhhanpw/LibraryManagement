@@ -23,6 +23,7 @@
                 </Setter>
 
             </Style>
+            
             <ControlTemplate x:Key="ErrorInfoTemplate">
                 <StackPanel>
                     <Border BorderBrush="Red" BorderThickness="2">
@@ -31,6 +32,7 @@
                     <TextBlock FontSize="8" FontStyle="Italic" Foreground="Red" Text="{Binding [0].ErrorContent}"/>
                 </StackPanel>
             </ControlTemplate>
+            
         </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -93,8 +95,9 @@
                     RelativeSource={RelativeSource FindAncestor,
                     AncestorType={x:Type UserControl}},
                     Path=DataContext.ReaderTypes}"
-                                     SelectedItem="{Binding LoaiDocGia, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                      SelectedIndex="0"
+                                     SelectedValue="{Binding Id, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     SelectedValuePath="Id"
                                      DisplayMemberPath="Ten" />
 
                 <TextBlock Grid.Row="2" Text="Ngày sinh"/>
@@ -183,8 +186,9 @@
                 <telerik:GridViewDataColumn Header="Họ Tên" Width="*"
                                             DataMemberBinding="{Binding Ten, UpdateSourceTrigger=PropertyChanged}"/>
                 <telerik:GridViewComboBoxColumn Header="Loại" ItemsSource="{Binding ReaderTypes}"
-                                                DisplayMemberPath="Ten"
-                                            DataMemberBinding="{Binding LoaiDocGia, UpdateSourceTrigger=PropertyChanged}"/>
+                                            DisplayMemberPath="Ten"
+                                            SelectedValueMemberPath="Id"
+                                            DataMemberBinding="{Binding IdLoai, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <telerik:GridViewDataColumn Header="Ngày Sinh" 
                                             DataMemberBinding="{Binding NgaySinh , UpdateSourceTrigger=PropertyChanged}" DataFormatString="M-d-yyyy"/>
                 <telerik:GridViewDataColumn Header="Địa Chỉ" Width="*"
