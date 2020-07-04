@@ -14,6 +14,7 @@
                 <Setter Property="Margin" Value="10"/>
                 <Setter Property="Padding" Value="10"/>
                 <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="BorderBrush" Value="DodgerBlue"/>
                 <Setter Property="HeaderTemplate">
                     <Setter.Value>
                         <DataTemplate>
@@ -23,27 +24,19 @@
                 </Setter>
 
             </Style>
-            
-            <ControlTemplate x:Key="ErrorInfoTemplate">
-                <StackPanel>
-                    <Border BorderBrush="Red" BorderThickness="2">
-                        <AdornedElementPlaceholder/>
-                    </Border>
-                    <TextBlock FontSize="8" FontStyle="Italic" Foreground="Red" Text="{Binding [0].ErrorContent}"/>
-                </StackPanel>
-            </ControlTemplate>
-            
+
         </Grid.Resources>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="40.2"/>
+            <ColumnDefinition Width="155"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <GroupBox
-            Header="Thông Tin Đọc Giả">
+            Header="Thông Tin Đọc Giả" Margin="10,10,9.8,9.8">
             <Grid DataContext="{Binding Holder}">
                 <Grid.Resources>
                     <Style TargetType="TextBlock">
@@ -90,7 +83,7 @@
                          />
 
                 <TextBlock Grid.Row="1" Text="Loại đọc giả"/>
-                <telerik:RadComboBox Grid.Column="1" Grid.Row="1" 
+                <telerik:RadComboBox Grid.Column="1" Grid.Row="1" FontWeight="Light"
                                      ItemsSource="{Binding 
                     RelativeSource={RelativeSource FindAncestor,
                     AncestorType={x:Type UserControl}},
@@ -127,76 +120,101 @@
             </Grid>
         </GroupBox>
 
-            <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="0 0 15 0" >
-                <StackPanel.Resources>
-                    <Style TargetType="telerik:RadButton" BasedOn="{StaticResource RadButtonStyle}">
-                        <Setter Property="Margin" Value="0 5 0 0"/>
-                        <Setter Property="Width" Value="150"/>
-                        <Setter Property="Height" Value="35"/>
-                        <Setter Property="FontSize" Value="14"/>
+        <StackPanel Grid.Column="1" VerticalAlignment="Center" Grid.ColumnSpan="2" >
+            <StackPanel.Resources>
 
+                <Style TargetType="telerik:RadButton" BasedOn="{StaticResource RadButtonStyle}">
+                    <Setter Property="Margin" Value="0 5 0 0"/>
+                    <Setter Property="Width" Value="180"/>
+                    <Setter Property="Height" Value="35"/>
+                    <Setter Property="FontSize" Value="14"/>
+                    <Setter Property="BorderThickness" Value="2"/>
+                    <Setter Property="BorderBrush" Value="DodgerBlue"/>
+                </Style>
 
-                    </Style>
-                </StackPanel.Resources>
-                <telerik:RadButton  Command="{Binding AddCommand}"
+            </StackPanel.Resources>
+
+            <telerik:RadButton  Command="{Binding AddCommand}"
                                     CommandParameter="{Binding Holder}"
                                     >
-                    <StackPanel Orientation="Horizontal" Width="90" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <telerik:RadGlyph Glyph="&#xe12e;" FontSize="25" />
-                        <TextBlock Text="Thêm" Margin="10 0 0 0" VerticalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" Width="120" VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                    <telerik:RadGlyph Glyph="&#xe12e;" FontSize="25" />
+                    <TextBlock Text="Thêm" Margin="10 0 0 0" VerticalAlignment="Center"/>
 
-                    </StackPanel>
-                </telerik:RadButton>
-                <telerik:RadButton  Command="{Binding EditCommand}"
+                </StackPanel>
+            </telerik:RadButton>
+
+            <telerik:RadButton  Command="{Binding EditCommand}"
                                     CommandParameter="{Binding ElementName=radGridView, Path=SelectedItem}">
-                    <StackPanel Orientation="Horizontal" Width="90" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <telerik:RadGlyph Glyph="&#xe64a;" FontSize="25" />
-                        <TextBlock Text="Sửa" Margin="10 0 0 0" VerticalAlignment="Center"/>
+                <StackPanel Orientation="Horizontal" Width="120" VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                    <telerik:RadGlyph Glyph="&#xe64a;" FontSize="25" />
+                    <TextBlock Text="Sửa" Margin="10 0 0 0" VerticalAlignment="Center"/>
 
-                    </StackPanel>
-                </telerik:RadButton>
-                <telerik:RadButton>
-                    <StackPanel Orientation="Horizontal" Width="90" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <telerik:RadGlyph Glyph="&#xe10c;" FontSize="25" />
-                        <TextBlock Text="Xóa" Margin="10 0 0 0" VerticalAlignment="Center"/>
+                </StackPanel>
+            </telerik:RadButton>
 
-                    </StackPanel>
-                </telerik:RadButton>
-            </StackPanel>
+            <telerik:RadButton>
+                <StackPanel Orientation="Horizontal" Width="120" VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                    <telerik:RadGlyph Glyph="&#xe10c;" FontSize="25" />
+                    <TextBlock Text="Xóa" Margin="10 0 0 0" VerticalAlignment="Center"/>
 
-        <telerik:RadGridView Margin="5" Grid.Row="1" Grid.ColumnSpan="2"
+                </StackPanel>
+            </telerik:RadButton>
+
+            <telerik:RadButton Command="{Binding ExportCommand}">
+                <StackPanel Orientation="Horizontal" Width="120" VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+                    <telerik:RadGlyph Glyph="&#xe665;" FontSize="25" />
+                    <TextBlock Text="Xuất Báo Cáo" Margin="10 0 0 0" VerticalAlignment="Center"/>
+
+                </StackPanel>
+            </telerik:RadButton>
+
+        </StackPanel>
+
+        <telerik:RadGridView Margin="5,5.2,5,4.6" Grid.Row="1" Grid.ColumnSpan="3"
                              ShowSearchPanel="True"
                              NewRowPosition="Bottom"
                              CanUserDeleteRows="True"
                              CanUserSearch="True"
                              x:Name="radGridView" ItemsSource="{Binding Readers}"
                              SelectedItem="{Binding SelectedReader,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                             AutoGenerateColumns="False" GroupRenderMode="Flat" CanUserFreezeColumns="False"
+                             AutoGenerateColumns="False"
+                             GroupRenderMode="Flat"
+                             CanUserFreezeColumns="False"
                              CanUserSortColumns="True">
-
 
             <telerik:EventToCommandBehavior.EventBindings>
                 <telerik:EventBinding EventName="RowEditEnded" 
                                       PassEventArgsToCommand="True"
                                       Command="{Binding EditOnTableDataCommand}"/>
             </telerik:EventToCommandBehavior.EventBindings>
-            
+
             <telerik:RadGridView.Columns>
 
                 <telerik:GridViewDataColumn Header="Họ Tên" Width="*"
                                             DataMemberBinding="{Binding Ten, UpdateSourceTrigger=PropertyChanged}"/>
+
                 <telerik:GridViewComboBoxColumn Header="Loại" ItemsSource="{Binding ReaderTypes}"
                                             DisplayMemberPath="Ten"
                                             SelectedValueMemberPath="Id"
                                             DataMemberBinding="{Binding IdLoai, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
                 <telerik:GridViewDataColumn Header="Ngày Sinh" 
                                             DataMemberBinding="{Binding NgaySinh , UpdateSourceTrigger=PropertyChanged}" DataFormatString="M-d-yyyy"/>
+
                 <telerik:GridViewDataColumn Header="Địa Chỉ" Width="*"
                                             DataMemberBinding="{Binding DiaChi, UpdateSourceTrigger=PropertyChanged}"/>
+
                 <telerik:GridViewDataColumn Header="Email" 
                                             DataMemberBinding="{Binding Email, UpdateSourceTrigger=PropertyChanged}"/>
+
                 <telerik:GridViewDataColumn Header="Ngày Lập Thẻ" 
                                             DataMemberBinding="{Binding NgayLap, UpdateSourceTrigger=PropertyChanged}"/>
+
             </telerik:RadGridView.Columns>
         </telerik:RadGridView>
     </Grid>
