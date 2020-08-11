@@ -34,7 +34,7 @@ namespace LibraryManagement.Model
         }
         private static int firstId = DataProvider.Instance.DataBase.LoaiDocGias.First().Id;
         private string _ten;
-        private LoaiDocGia _loaiDocGia;
+        private int _idLoai;
         private DateTime _ngaySinh = DateTime.Now.AddYears(-18);
         private string _diachi;
         private string _email;
@@ -47,7 +47,11 @@ namespace LibraryManagement.Model
             get { return _ten; }
             set { SetValidatableProperty(ref _ten, value, this); }
         }
-        public int IdLoai { get; set; }
+        public int IdLoai
+        {
+            get { return _idLoai; }
+            set { SetBindableProperty(ref _idLoai, value); }
+        }
         public DateTime NgaySinh
         {
             get { return _ngaySinh; }
@@ -77,11 +81,12 @@ namespace LibraryManagement.Model
             }
         }
 
-        public virtual LoaiDocGia LoaiDocGia
-        {
-            get { return _loaiDocGia; }
-            set { SetBindableProperty(ref _loaiDocGia, value); }
-        }
+        public Nullable<bool> IsDeleted { get; set; }
+
+
+        
+
+        public virtual LoaiDocGia LoaiDocGia { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PhieuMuon> PhieuMuons { get; set; }
     }

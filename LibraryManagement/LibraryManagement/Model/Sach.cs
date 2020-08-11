@@ -28,6 +28,8 @@ namespace LibraryManagement.Model
         public string NhaXB { get; set; }
         public Nullable<System.DateTime> NgayNhap { get; set; }
         public Nullable<int> SoLuong { get; set; }
+        public Nullable<int> Gia { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTPhieuMuon> CTPhieuMuons { get; set; }

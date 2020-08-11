@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="QLThuVienModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="QLThuVienModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CTPhieuMuon">
           <Key>
             <PropertyRef Name="IdPhieuMuon" />
@@ -13,6 +13,8 @@
           <Property Name="IdPhieuMuon" Type="int" Nullable="false" />
           <Property Name="IdSach" Type="int" Nullable="false" />
           <Property Name="NgayTra" Type="date" />
+          <Property Name="TienPhat" Type="int" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="DocGia">
           <Key>
@@ -25,6 +27,7 @@
           <Property Name="DiaChi" Type="nvarchar" MaxLength="100" />
           <Property Name="Email" Type="nvarchar" MaxLength="50" />
           <Property Name="NgayLap" Type="date" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="LoaiDocGia">
           <Key>
@@ -32,6 +35,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Ten" Type="varchar" MaxLength="1" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="LoaiSach">
           <Key>
@@ -39,6 +43,7 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Ten" Type="varchar" MaxLength="1" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="PhieuMuon">
           <Key>
@@ -47,6 +52,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdDocGia" Type="int" />
           <Property Name="NgayMuon" Type="date" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <EntityType Name="QuyDinh">
           <Key>
@@ -58,6 +64,9 @@
           <Property Name="KhoangNamXBSach" Type="int" />
           <Property Name="SLSachMuonToiDa" Type="int" />
           <Property Name="SoNgayMuonToiDa" Type="int" />
+          <Property Name="TienPhatTreSach_Ngay" Type="int" />
+          <Property Name="PhanTramGiaSach" Type="int" />
+          <Property Name="ChiPhiSachMat" Type="int" />
         </EntityType>
         <EntityType Name="Sach">
           <Key>
@@ -71,6 +80,8 @@
           <Property Name="NhaXB" Type="nvarchar" MaxLength="50" />
           <Property Name="NgayNhap" Type="date" />
           <Property Name="SoLuong" Type="int" />
+          <Property Name="Gia" Type="int" />
+          <Property Name="IsDeleted" Type="bit" />
         </EntityType>
         <Association Name="FK_CTPM_PHIEUMUON">
           <End Role="PhieuMuon" Type="Self.PhieuMuon" Multiplicity="1" />
@@ -161,8 +172,7 @@
             <End Role="Sach" EntitySet="Sach" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QLThuVienModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -176,6 +186,8 @@
           <Property Name="NgayTra" Type="DateTime" Precision="0" />
           <NavigationProperty Name="PhieuMuon" Relationship="Self.FK_CTPM_PHIEUMUON" FromRole="CTPhieuMuon" ToRole="PhieuMuon" />
           <NavigationProperty Name="Sach" Relationship="Self.FK_CTPM_SACH" FromRole="CTPhieuMuon" ToRole="Sach" />
+          <Property Name="TienPhat" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="DocGia">
           <Key>
@@ -190,6 +202,7 @@
           <Property Name="NgayLap" Type="DateTime" Precision="0" />
           <NavigationProperty Name="LoaiDocGia" Relationship="Self.FK_DG_LOAI" FromRole="DocGia" ToRole="LoaiDocGia" />
           <NavigationProperty Name="PhieuMuons" Relationship="Self.FK_PM_SACH" FromRole="DocGia" ToRole="PhieuMuon" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="LoaiDocGia">
           <Key>
@@ -198,6 +211,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Ten" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="DocGias" Relationship="Self.FK_DG_LOAI" FromRole="LoaiDocGia" ToRole="DocGia" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="LoaiSach">
           <Key>
@@ -206,6 +220,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Ten" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Saches" Relationship="Self.FK_SACH_LOAI" FromRole="LoaiSach" ToRole="Sach" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="PhieuMuon">
           <Key>
@@ -216,6 +231,7 @@
           <Property Name="NgayMuon" Type="DateTime" Precision="0" />
           <NavigationProperty Name="CTPhieuMuons" Relationship="Self.FK_CTPM_PHIEUMUON" FromRole="PhieuMuon" ToRole="CTPhieuMuon" />
           <NavigationProperty Name="DocGia" Relationship="Self.FK_PM_SACH" FromRole="PhieuMuon" ToRole="DocGia" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <EntityType Name="QuyDinh">
           <Key>
@@ -227,6 +243,9 @@
           <Property Name="KhoangNamXBSach" Type="Int32" />
           <Property Name="SLSachMuonToiDa" Type="Int32" />
           <Property Name="SoNgayMuonToiDa" Type="Int32" />
+          <Property Name="TienPhatTreSach_Ngay" Type="Int32" />
+          <Property Name="PhanTramGiaSach" Type="Int32" />
+          <Property Name="ChiPhiSachMat" Type="Int32" />
         </EntityType>
         <EntityType Name="Sach">
           <Key>
@@ -242,6 +261,8 @@
           <Property Name="SoLuong" Type="Int32" />
           <NavigationProperty Name="CTPhieuMuons" Relationship="Self.FK_CTPM_SACH" FromRole="Sach" ToRole="CTPhieuMuon" />
           <NavigationProperty Name="LoaiSach" Relationship="Self.FK_SACH_LOAI" FromRole="Sach" ToRole="LoaiSach" />
+          <Property Name="Gia" Type="Int32" />
+          <Property Name="IsDeleted" Type="Boolean" />
         </EntityType>
         <Association Name="FK_CTPM_PHIEUMUON">
           <End Role="PhieuMuon" Type="Self.PhieuMuon" Multiplicity="1" />
@@ -341,6 +362,8 @@
           <EntitySetMapping Name="CTPhieuMuons">
             <EntityTypeMapping TypeName="QLThuVienModel.CTPhieuMuon">
               <MappingFragment StoreEntitySet="CTPhieuMuon">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="TienPhat" ColumnName="TienPhat" />
                 <ScalarProperty Name="IdPhieuMuon" ColumnName="IdPhieuMuon" />
                 <ScalarProperty Name="IdSach" ColumnName="IdSach" />
                 <ScalarProperty Name="NgayTra" ColumnName="NgayTra" />
@@ -350,6 +373,7 @@
           <EntitySetMapping Name="DocGias">
             <EntityTypeMapping TypeName="QLThuVienModel.DocGia">
               <MappingFragment StoreEntitySet="DocGia">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Ten" ColumnName="Ten" />
                 <ScalarProperty Name="IdLoai" ColumnName="IdLoai" />
@@ -363,6 +387,7 @@
           <EntitySetMapping Name="LoaiDocGias">
             <EntityTypeMapping TypeName="QLThuVienModel.LoaiDocGia">
               <MappingFragment StoreEntitySet="LoaiDocGia">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Ten" ColumnName="Ten" />
               </MappingFragment>
@@ -371,6 +396,7 @@
           <EntitySetMapping Name="LoaiSaches">
             <EntityTypeMapping TypeName="QLThuVienModel.LoaiSach">
               <MappingFragment StoreEntitySet="LoaiSach">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Ten" ColumnName="Ten" />
               </MappingFragment>
@@ -379,6 +405,7 @@
           <EntitySetMapping Name="PhieuMuons">
             <EntityTypeMapping TypeName="QLThuVienModel.PhieuMuon">
               <MappingFragment StoreEntitySet="PhieuMuon">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="IdDocGia" ColumnName="IdDocGia" />
                 <ScalarProperty Name="NgayMuon" ColumnName="NgayMuon" />
@@ -388,6 +415,9 @@
           <EntitySetMapping Name="QuyDinhs">
             <EntityTypeMapping TypeName="QLThuVienModel.QuyDinh">
               <MappingFragment StoreEntitySet="QuyDinh">
+                <ScalarProperty Name="ChiPhiSachMat" ColumnName="ChiPhiSachMat" />
+                <ScalarProperty Name="PhanTramGiaSach" ColumnName="PhanTramGiaSach" />
+                <ScalarProperty Name="TienPhatTreSach_Ngay" ColumnName="TienPhatTreSach_Ngay" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="TuoiToiThieuDG" ColumnName="TuoiToiThieuDG" />
                 <ScalarProperty Name="TuoiToiDaDG" ColumnName="TuoiToiDaDG" />
@@ -400,6 +430,8 @@
           <EntitySetMapping Name="Saches">
             <EntityTypeMapping TypeName="QLThuVienModel.Sach">
               <MappingFragment StoreEntitySet="Sach">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Gia" ColumnName="Gia" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Ten" ColumnName="Ten" />
                 <ScalarProperty Name="IdLoai" ColumnName="IdLoai" />

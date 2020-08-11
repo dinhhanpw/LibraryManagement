@@ -4,6 +4,8 @@
     <EntitySetMapping Name="CTPhieuMuons">
       <EntityTypeMapping TypeName="QLThuVienModel.CTPhieuMuon">
         <MappingFragment StoreEntitySet="CTPhieuMuon">
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="TienPhat" ColumnName="TienPhat" />
           <ScalarProperty Name="IdPhieuMuon" ColumnName="IdPhieuMuon" />
           <ScalarProperty Name="IdSach" ColumnName="IdSach" />
           <ScalarProperty Name="NgayTra" ColumnName="NgayTra" />
@@ -13,6 +15,7 @@
     <EntitySetMapping Name="DocGias">
       <EntityTypeMapping TypeName="QLThuVienModel.DocGia">
         <MappingFragment StoreEntitySet="DocGia">
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Ten" ColumnName="Ten" />
           <ScalarProperty Name="IdLoai" ColumnName="IdLoai" />
@@ -26,6 +29,7 @@
     <EntitySetMapping Name="LoaiDocGias">
       <EntityTypeMapping TypeName="QLThuVienModel.LoaiDocGia">
         <MappingFragment StoreEntitySet="LoaiDocGia">
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Ten" ColumnName="Ten" />
         </MappingFragment>
@@ -34,6 +38,7 @@
     <EntitySetMapping Name="LoaiSaches">
       <EntityTypeMapping TypeName="QLThuVienModel.LoaiSach">
         <MappingFragment StoreEntitySet="LoaiSach">
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Ten" ColumnName="Ten" />
         </MappingFragment>
@@ -42,6 +47,7 @@
     <EntitySetMapping Name="PhieuMuons">
       <EntityTypeMapping TypeName="QLThuVienModel.PhieuMuon">
         <MappingFragment StoreEntitySet="PhieuMuon">
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="IdDocGia" ColumnName="IdDocGia" />
           <ScalarProperty Name="NgayMuon" ColumnName="NgayMuon" />
@@ -51,6 +57,9 @@
     <EntitySetMapping Name="QuyDinhs">
       <EntityTypeMapping TypeName="QLThuVienModel.QuyDinh">
         <MappingFragment StoreEntitySet="QuyDinh">
+          <ScalarProperty Name="ChiPhiSachMat" ColumnName="ChiPhiSachMat" />
+          <ScalarProperty Name="PhanTramGiaSach" ColumnName="PhanTramGiaSach" />
+          <ScalarProperty Name="TienPhatTreSach_Ngay" ColumnName="TienPhatTreSach_Ngay" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="TuoiToiThieuDG" ColumnName="TuoiToiThieuDG" />
           <ScalarProperty Name="TuoiToiDaDG" ColumnName="TuoiToiDaDG" />
@@ -63,6 +72,8 @@
     <EntitySetMapping Name="Saches">
       <EntityTypeMapping TypeName="QLThuVienModel.Sach">
         <MappingFragment StoreEntitySet="Sach">
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Gia" ColumnName="Gia" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Ten" ColumnName="Ten" />
           <ScalarProperty Name="IdLoai" ColumnName="IdLoai" />

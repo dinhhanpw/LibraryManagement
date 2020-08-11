@@ -22,6 +22,7 @@ namespace LibraryManagement.Model
     
         public int Id { get; set; }
         public string Ten { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DocGia> DocGias { get; set; }

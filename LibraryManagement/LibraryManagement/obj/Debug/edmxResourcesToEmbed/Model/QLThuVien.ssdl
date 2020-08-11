@@ -8,6 +8,8 @@
     <Property Name="IdPhieuMuon" Type="int" Nullable="false" />
     <Property Name="IdSach" Type="int" Nullable="false" />
     <Property Name="NgayTra" Type="date" />
+    <Property Name="TienPhat" Type="int" />
+    <Property Name="IsDeleted" Type="bit" />
   </EntityType>
   <EntityType Name="DocGia">
     <Key>
@@ -20,6 +22,7 @@
     <Property Name="DiaChi" Type="nvarchar" MaxLength="100" />
     <Property Name="Email" Type="nvarchar" MaxLength="50" />
     <Property Name="NgayLap" Type="date" />
+    <Property Name="IsDeleted" Type="bit" />
   </EntityType>
   <EntityType Name="LoaiDocGia">
     <Key>
@@ -27,6 +30,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Ten" Type="varchar" MaxLength="1" />
+    <Property Name="IsDeleted" Type="bit" />
   </EntityType>
   <EntityType Name="LoaiSach">
     <Key>
@@ -34,6 +38,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Ten" Type="varchar" MaxLength="1" />
+    <Property Name="IsDeleted" Type="bit" />
   </EntityType>
   <EntityType Name="PhieuMuon">
     <Key>
@@ -42,6 +47,7 @@
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdDocGia" Type="int" />
     <Property Name="NgayMuon" Type="date" />
+    <Property Name="IsDeleted" Type="bit" />
   </EntityType>
   <EntityType Name="QuyDinh">
     <Key>
@@ -53,6 +59,9 @@
     <Property Name="KhoangNamXBSach" Type="int" />
     <Property Name="SLSachMuonToiDa" Type="int" />
     <Property Name="SoNgayMuonToiDa" Type="int" />
+    <Property Name="TienPhatTreSach_Ngay" Type="int" />
+    <Property Name="PhanTramGiaSach" Type="int" />
+    <Property Name="ChiPhiSachMat" Type="int" />
   </EntityType>
   <EntityType Name="Sach">
     <Key>
@@ -66,6 +75,8 @@
     <Property Name="NhaXB" Type="nvarchar" MaxLength="50" />
     <Property Name="NgayNhap" Type="date" />
     <Property Name="SoLuong" Type="int" />
+    <Property Name="Gia" Type="int" />
+    <Property Name="IsDeleted" Type="bit" />
   </EntityType>
   <Association Name="FK_CTPM_PHIEUMUON">
     <End Role="PhieuMuon" Type="Self.PhieuMuon" Multiplicity="1" />

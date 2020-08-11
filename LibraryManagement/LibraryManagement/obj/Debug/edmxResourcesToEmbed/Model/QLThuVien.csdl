@@ -10,6 +10,8 @@
     <Property Name="NgayTra" Type="DateTime" Precision="0" />
     <NavigationProperty Name="PhieuMuon" Relationship="Self.FK_CTPM_PHIEUMUON" FromRole="CTPhieuMuon" ToRole="PhieuMuon" />
     <NavigationProperty Name="Sach" Relationship="Self.FK_CTPM_SACH" FromRole="CTPhieuMuon" ToRole="Sach" />
+    <Property Name="TienPhat" Type="Int32" />
+    <Property Name="IsDeleted" Type="Boolean" />
   </EntityType>
   <EntityType Name="DocGia">
     <Key>
@@ -24,6 +26,7 @@
     <Property Name="NgayLap" Type="DateTime" Precision="0" />
     <NavigationProperty Name="LoaiDocGia" Relationship="Self.FK_DG_LOAI" FromRole="DocGia" ToRole="LoaiDocGia" />
     <NavigationProperty Name="PhieuMuons" Relationship="Self.FK_PM_SACH" FromRole="DocGia" ToRole="PhieuMuon" />
+    <Property Name="IsDeleted" Type="Boolean" />
   </EntityType>
   <EntityType Name="LoaiDocGia">
     <Key>
@@ -32,6 +35,7 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Ten" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="DocGias" Relationship="Self.FK_DG_LOAI" FromRole="LoaiDocGia" ToRole="DocGia" />
+    <Property Name="IsDeleted" Type="Boolean" />
   </EntityType>
   <EntityType Name="LoaiSach">
     <Key>
@@ -40,6 +44,7 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Ten" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="Saches" Relationship="Self.FK_SACH_LOAI" FromRole="LoaiSach" ToRole="Sach" />
+    <Property Name="IsDeleted" Type="Boolean" />
   </EntityType>
   <EntityType Name="PhieuMuon">
     <Key>
@@ -50,6 +55,7 @@
     <Property Name="NgayMuon" Type="DateTime" Precision="0" />
     <NavigationProperty Name="CTPhieuMuons" Relationship="Self.FK_CTPM_PHIEUMUON" FromRole="PhieuMuon" ToRole="CTPhieuMuon" />
     <NavigationProperty Name="DocGia" Relationship="Self.FK_PM_SACH" FromRole="PhieuMuon" ToRole="DocGia" />
+    <Property Name="IsDeleted" Type="Boolean" />
   </EntityType>
   <EntityType Name="QuyDinh">
     <Key>
@@ -61,6 +67,9 @@
     <Property Name="KhoangNamXBSach" Type="Int32" />
     <Property Name="SLSachMuonToiDa" Type="Int32" />
     <Property Name="SoNgayMuonToiDa" Type="Int32" />
+    <Property Name="TienPhatTreSach_Ngay" Type="Int32" />
+    <Property Name="PhanTramGiaSach" Type="Int32" />
+    <Property Name="ChiPhiSachMat" Type="Int32" />
   </EntityType>
   <EntityType Name="Sach">
     <Key>
@@ -76,6 +85,8 @@
     <Property Name="SoLuong" Type="Int32" />
     <NavigationProperty Name="CTPhieuMuons" Relationship="Self.FK_CTPM_SACH" FromRole="Sach" ToRole="CTPhieuMuon" />
     <NavigationProperty Name="LoaiSach" Relationship="Self.FK_SACH_LOAI" FromRole="Sach" ToRole="LoaiSach" />
+    <Property Name="Gia" Type="Int32" />
+    <Property Name="IsDeleted" Type="Boolean" />
   </EntityType>
   <Association Name="FK_CTPM_PHIEUMUON">
     <End Role="PhieuMuon" Type="Self.PhieuMuon" Multiplicity="1" />

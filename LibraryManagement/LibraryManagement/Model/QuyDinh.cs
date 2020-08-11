@@ -20,5 +20,8 @@ namespace LibraryManagement.Model
         public Nullable<int> KhoangNamXBSach { get; set; }
         public Nullable<int> SLSachMuonToiDa { get; set; }
         public Nullable<int> SoNgayMuonToiDa { get; set; }
+        public Nullable<int> TienPhatTreSach_Ngay { get; set; }
+        public Nullable<int> PhanTramGiaSach { get; set; }
+        public Nullable<int> ChiPhiSachMat { get; set; }
     }
 }

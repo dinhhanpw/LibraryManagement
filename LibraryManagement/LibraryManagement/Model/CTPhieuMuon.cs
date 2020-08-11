@@ -17,6 +17,8 @@ namespace LibraryManagement.Model
         public int IdPhieuMuon { get; set; }
         public int IdSach { get; set; }
         public Nullable<System.DateTime> NgayTra { get; set; }
+        public Nullable<int> TienPhat { get; set; }
+        public Nullable<bool> IsDeleted { get; set; }
     
         public virtual PhieuMuon PhieuMuon { get; set; }
         public virtual Sach Sach { get; set; }
